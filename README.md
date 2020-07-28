@@ -1,4 +1,6 @@
-# mit-sign-and-design
+# vue-template
+
+A place I'm keeping all my personal vue styling and components for when I make a new website. feel free to send suggestions and improvements!
 
 ## Project setup
 ```
