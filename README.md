@@ -1,6 +1,7 @@
-# vue-template
+# Vue Template
 
-A place I'm keeping all my personal vue styling and components for when I make a new website. feel free to send suggestions and improvements!
+A place I'm keeping all my personal vue styling and components for when I make a new website.
+feel free to send suggestions and improvements!
 
 ## Project setup
 ```
