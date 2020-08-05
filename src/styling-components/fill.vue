@@ -7,8 +7,8 @@
 <style scoped>
     .fill {
         position: absolute;
-        left: 0;
-        right: 0;
+        left: -8px;
+        right: -8px;
         top: 0;
         bottom: 0;   
     }

@@ -69,8 +69,6 @@ export default {
 <style scoped>
     .slideshow {
         position: relative;
-        width:101%;
-        left: -0.5%;
     }
     .slideshow div {
         background-repeat: no-repeat;

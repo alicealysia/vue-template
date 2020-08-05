@@ -6,8 +6,8 @@
 <style scoped>
     .background {
         position: absolute;
-        left: -0.5%;
-        width: 101%;
+        left: -8px;
+        width: calc(100% + 8px);
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
