@@ -15,6 +15,16 @@ Vue.use(VueRouter)
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
+  scrollBehavior: function(to, from, savedPosition) { //eslint-disable-line
+    if (savedPosition) {
+      return savedPosition;
+    }
+    if (to.hash) {
+        return {selector: to.hash}
+    } else {
+        return { x: 0, y: 0 }
+    }
+  },
   routes
 })
 

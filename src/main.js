@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex';
+import ScrollActive from 'vue-scrollactive';
 import App from './App.vue'
 import router from './router'
 import './styling-components';
@@ -7,6 +8,7 @@ import './styling-components';
 Vue.config.productionTip = false
 
 Vue.use(Vuex);
+Vue.use(ScrollActive);
 const store = new Vuex.Store({
   state: {
     fullscreen: false,

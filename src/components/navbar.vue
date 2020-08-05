@@ -1,17 +1,17 @@
 <template>
-    <nav :class="{active: active}">
+    <scrollactive :class="{active: active}">
       <img src="../assets/logo.png" />
       <hamburger @hamburgerClicked="hamburgerClicked" />
-      <router-link @click.native="hamburgerClicked()" to="/">Home</router-link>
-      <router-link @click.native="hamburgerClicked()" to="/services">Services</router-link>
-      <a @click="toggleGallery"> Gallery &#9660; </a>
-      <div @click="toggleGallery" :class="gallery? 'gallery': 'hide'">
+      <router-link @click.native="hamburgerClicked()" class="scrollactive-item" :to="{name: 'Home', hash: '#home'}">Home</router-link>
+      <router-link @click.native="hamburgerClicked()" class="scrollactive-item" :to="{name: 'Home', hash: '#about'}">About</router-link>
+      <!-- <a @click="toggleGallery"> Gallery &#9660; </a> -->
+      <!-- <div @click="toggleGallery" :class="gallery? 'gallery': 'hide'">
         <router-link @click.native="hamburgerClicked()" to="/gallery/cars"> Car Signage </router-link>
         <router-link @click.native="hamburgerClicked()" to="/gallery/signs"> Building Signage </router-link>
         <router-link @click.native="hamburgerClicked()" to="/gallery/other"> Other </router-link>
-      </div>
-      <router-link @click.native="hamburgerClicked()" to="/contact">Contact</router-link>
-    </nav>
+      </div> -->
+      <router-link @click.native="hamburgerClicked()" class="scrollactive-item" :to="{name: 'Home', hash: '#contact'}">Contact</router-link>
+    </scrollactive>
 </template>
 <script>
 export default {
@@ -128,11 +128,19 @@ nav a {
 }
 
 nav a:hover {
-    color:rgb(245, 102, 55);
+    color:rgb(71, 255, 55);
 }
 
 nav a.router-link-exact-active {
-  color: rgb(240, 136, 101);
+  color: rgb(65, 148, 62);
+}
+
+nav a.router-link-exact-active.scrollactive-item {
+  color: #e6e6e6;
+}
+
+.scrollactive-item.is-active {
+  color: rgb(65, 148, 62) !important;
 }
 
 .galleryButton {

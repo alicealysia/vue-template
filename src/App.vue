@@ -3,9 +3,8 @@
     <fullscreen />
     <div class="darken">
       <navbar />
-      <spacer />
-      <spacer />
       <router-view/>
+      <spacer />
     </div>
   </div>
 </template>
@@ -27,11 +26,9 @@ export default {
 @media (orientation: landscape) and (min-width: 1281px) {
   html {
     font-size: 1vmax;
-    background-color: rgb(34, 34, 34);
-    background-attachment: fixed;
-    background-position: center;
-    background-size: cover;
-    background-image: url('./assets/html-background-texture.jpg');
+  }
+  .mobile {
+    display: none;
   }
 }
 
@@ -39,17 +36,12 @@ export default {
   html {
     font-size: 3vmax;
   }
-  body::before {
-  content: "";
-  display:block;
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -10;
-  background: url('./assets/html-background-texture.jpg');
+  .pc {
+    display: none;
+  }
 }
+html {
+  background-color: #E6E7ED;
 }
 
 button.round-big {

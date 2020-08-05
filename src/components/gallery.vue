@@ -1,10 +1,12 @@
 <template>
     <container class="gallery">
-        <h3 v-if="items[nextItem].title || items[0].title"> {{items[nextItem].title || items[0].title}} </h3>
+        <h1 v-if="title"> {{title}} </h1>
         <div class="slideshow">
-            <fill :class="displayToggle ? 'hide' : 'show'" :style="{ 'background-image': displayToggle? `url(${images[prevItem]})`:`url(${images[nextItem]})`}" />
-            <fill :class="displayToggle ? 'show' : 'hide'" :style="{ 'background-image': displayToggle? `url(${images[nextItem]})`:`url(${images[prevItem]})`}" />
-            <span v-if="items[nextItem].text"> {{items[nextItem].text}} </span>
+            <transition v-on:after-enter="start = false;" name="fade" type="animation">
+                <fill v-if="start" :style="{backgroundImage: images[previous]}" />
+            </transition>
+            <fill :style="{ backgroundImage: images[current]}" />
+            <span v-if="text"> {{text}} </span>
             <button class="round-big top" @click="fullscreen()"> <img src="../assets/fullscreen.png" /> </button>
         </div>
         <div class="line" />
@@ -17,29 +19,40 @@
 <script>
 export default {
     props: {
-        items: Array
+        items: Array || Object
     },
     data () {
         return {
-            displayToggle: false,
-            nextItem: 0,
-            prevItem: 0,
-            images: this.items.map(item => item.image)
+            start: false,
+            current: 0,
+            previous: 0,
+            links: undefined,
+            images: this.items.images || this.items.map(item => item.image),
+            title: this.items.title || this.items[0].title,
+            text: this.items.text || this.items[0].text
+        }
+    },
+    watch: {
+        current: function(val) {
+            if (!this.items.images) {
+                this.title = this.items[val].title;
+                this.text = this.items[val].text;
+            }
         }
     },
     methods: {
         switchItem (index) {
-            this.prevItem = this.nextItem;
-            this.displayToggle = !this.displayToggle;
-            this.nextItem = index;
+            this.previous = this.current;
+            this.start = true;
+            this.current = index;
         },
         link () {
-            if (this.items[this.nextItem].link) {
-                this.$router.push(this.items[this.nextItem].link);
+            if (this.links[this.current]) {
+                this.$router.push(this.links[this.current]);
             }
         },
         fullscreen () {
-            this.$store.commit('setImage', `url(${this.items[this.nextItem].image})`);
+            this.$store.commit('setImage', this.images[this.current]);
             this.$store.commit('setFullscreen', true);
         }
     }
@@ -64,10 +77,23 @@ export default {
         margin: auto;
     }
     .slideshow div {
-        transition: opacity ease-in-out 0.3s;
+        /* transition: opacity ease-in-out 0.3s; */
         background-repeat: no-repeat;
         background-position:center;
         background-size: cover;
+        background-attachment: fixed;
+    }
+    .fade-enter-active {
+        animation: fadeIn 0.5s;
+        z-index: 1;
+    }
+    @keyframes fadeIn {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
     }
     span {
         position: absolute;
@@ -78,12 +104,6 @@ export default {
         padding: 10px;
         border-radius:5px;
         background-color: rgba(0, 0, 0, 0.7);
-    }
-    div.hide {
-        opacity: 0;
-    }
-    div.show {
-        opacity: 1;
     }
     button img {
         width: 50%;
