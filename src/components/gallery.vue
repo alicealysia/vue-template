@@ -3,15 +3,14 @@
         <h1 v-if="title"> {{title}} </h1>
         <div class="slideshow">
             <transition v-on:after-enter="start = false;" name="fade" type="animation">
-                <fill v-if="start" :style="{backgroundImage: images[previous]}" />
+                <fill v-if="start" :style="{backgroundImage: `url(${previous}`}" />
             </transition>
-            <fill :style="{ backgroundImage: images[current]}" />
-            <span v-if="text"> {{text}} </span>
+            <fill v-lazy:background-image="images[current]" />
             <button class="round-big top" @click="fullscreen()"> <img src="../assets/fullscreen.png" /> </button>
         </div>
         <div class="line" />
         <row>
-            <img v-for="(item, index) in images" :key="index" @click="switchItem(index)" :src="item" />
+            <img v-for="(item, index) in mini" :key="index" @click="switchItem(index)" v-lazy="item" />
         </row>
     </container>
 </template>
@@ -19,17 +18,17 @@
 <script>
 export default {
     props: {
-        items: Array || Object
+        items: Array || Object,
+        mini: Array
     },
     data () {
         return {
             start: false,
             current: 0,
-            previous: 0,
+            previous: '',
             links: undefined,
             images: this.items.images || this.items.map(item => item.image),
-            title: this.items.title || this.items[0].title,
-            text: this.items.text || this.items[0].text
+            title: this.items.title || this.items[0].title || undefined
         }
     },
     watch: {
@@ -42,7 +41,7 @@ export default {
     },
     methods: {
         switchItem (index) {
-            this.previous = this.current;
+            this.previous = this.images[this.current];
             this.start = true;
             this.current = index;
         },
@@ -55,16 +54,24 @@ export default {
             this.$store.commit('setImage', this.images[this.current]);
             this.$store.commit('setFullscreen', true);
         }
+    },
+    mounted() {
+        if (this.items.images) {
+            this.title = this.items[0].title;
+        }
     }
 }
 </script>
 
 <style scoped>
+    .fill {
+        left: 0 !important;
+        right: 0 !important;
+    }
     .gallery {
         background-color:rgb(49, 49, 52);
-        border-radius: 0.25em; 
         padding-top: 2px;
-        background-image: url('../assets/fabric.png');
+        color: white;
     }
     .line {
         background-color: #afafaf;
@@ -81,7 +88,6 @@ export default {
         background-repeat: no-repeat;
         background-position:center;
         background-size: cover;
-        background-attachment: fixed;
     }
     .fade-enter-active {
         animation: fadeIn 0.5s;

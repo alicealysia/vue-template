@@ -2,7 +2,7 @@
   <div id="app">
     <fullscreen />
     <div class="darken">
-      <navbar />
+      <!-- <navbar /> -->
       <router-view/>
       <spacer />
     </div>
@@ -10,12 +10,12 @@
 </template>
 
 <script>
-import navbar from './components/navbar';
+// import navbar from './components/navbar';
 import fullscreen from './components/fullscreen';
 export default {
   name: 'app',
   components: {
-    navbar,
+    // navbar,
     fullscreen
   }
 }

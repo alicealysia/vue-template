@@ -1,10 +1,12 @@
 <template>
   <div class="home">
     <div class="darken">
-      <h1> Simple text </h1>
+      <spacer />
+      <spacer />
+      <h1> {{siteName}} </h1>
       <container>
-        <strong>  Oh yes </strong>
-        <p>  Very Nice ;) </p>
+        <strong>  Coming Soon! </strong>
+        <p> An exciting new project from MIT services </p>
       </container>
     </div>
     <spacer />
@@ -13,6 +15,17 @@
 
 <script>
 export default {
-  name: 'Home'
+  name: 'Home',
+  data() {
+    return {
+      siteName: 'MIT Business Consulting Australia'
+    }
+  }
 }
 </script>
+
+<style scoped>
+  .home {
+  color: black;
+  }
+</style>

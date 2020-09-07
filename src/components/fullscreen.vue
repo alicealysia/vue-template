@@ -3,7 +3,7 @@
         <button @click="closeFullscreen()" class="round-big">
             <img src="../assets/fullscreen.png" />
         </button>
-        <fill :style="{'background-image': $store.state.image}" />
+        <fill :style="{'background-image': 'url(' + $store.state.image + ')'}" />
     </fill>
 </template>
 

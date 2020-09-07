@@ -1,9 +1,9 @@
 <template>
     <div class="slideshow">
         <transition v-on:after-enter="start = false;" name="fade" type="animation">
-            <fill v-if="start" :style="{backgroundImage: images[previous]}" />
+            <fill v-if="start" :style="{backgroundImage: `url(${previous}`}" />
         </transition>
-        <fill :style="{ backgroundImage: images[current]}" />
+        <fill v-lazy:background-image="images[current]" />
         <div class="words">
             <h1 @click="link()" v-if="title"> {{title}} </h1>
             <span v-if="text"> {{text}} </span>
@@ -23,7 +23,7 @@ export default {
         return {
             start: false,
             current: 0,
-            previous: 0,
+            previous: '',
             links: undefined,
             images: this.items.images || this.items.map(item => item.image),
             title: this.items.title || this.items[0].title,
@@ -42,7 +42,7 @@ export default {
     methods: {
         switchItem (item, index) {
             console.log(item);
-            this.previous = item;
+            this.previous = this.images[item];
             this.start = true;
             if (item + index >= this.images.length) {
                 return 0;
@@ -97,7 +97,7 @@ export default {
         padding: 10px;
         border-radius:5px;
         color: rgb(236, 236, 236);
-        text-shadow: 1px 0px 8px #000000, -1px 0px 8px #000000, 0px 1px 8px #000000, 0px -1px 8px #000000;
+        text-shadow: 1px 0px 8px #000, -1px 0px 8px #000, 0px 1px 8px #000, 0px -1px 8px #000;
         text-align:center;
         z-index:2;
     }
