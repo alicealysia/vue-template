@@ -16,7 +16,7 @@
 <script>
 export default {
     props: {
-        items: Array || Object,
+        items: [Array, Object],
         buttons: Boolean
     },
     data () {
@@ -73,8 +73,11 @@ export default {
     .slideshow div {
         background-repeat: no-repeat;
         background-position:center;
-        background-size: cover;
         background-attachment: fixed;
+        background-size: cover;
+    }
+    .slideshow > .fill[lazy="loading"] {
+        background-size: auto;
     }
     .fade-enter-active {
         animation: fadeIn 0.5s;

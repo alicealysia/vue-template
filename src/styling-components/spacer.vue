@@ -9,7 +9,16 @@ export default {
 </script>
 <style scoped>
     div {
-        height: 3em;
         width: 100%;
+    }
+    @media (orientation: landscape) and (min-width: 1281px) {
+        div {
+            height: calc(60px + 1.68rem);
+        }
+    }
+    @media (orientation: portrait), (max-width: 1280px) {
+        div {
+            height: 3em;
+        }
     }
 </style>

@@ -1,20 +1,30 @@
 <template>
-    <background id="footbar">
-        Copyright Dunrite Fencing (M. Coles Enterprises PTY LTD) 2020. Designed by Alice Ewing of MIT Sign and Design. All rights reserved. 
-    </background>
+    <div id="footbar" class="relative" @click="credits()">
+        <background />
+        Copyright MIT Services 2020. Click Here for Attributions and Credits.
+    </div>
 </template>
 <script>
 export default {
-    name: 'footbar'    
+    name: 'footbar',
+    methods: {
+        credits() {
+            this.$router.push('/credits');
+        }
+    }
 }
 </script>
 <style scoped>
     .background {
+        background-color: #151516;
+    }
+    #footbar {
+        color: rgb(236, 236, 236);
+        display: inline-block;
         height: auto !important;
         right: 0 !important;
         font-size: 0.8em;
-        background-color: #2D2E33;
-        color: rgb(236, 236, 236);
-        display: inline-block;
+        width: 100%;
+        cursor: pointer;
     }
 </style>

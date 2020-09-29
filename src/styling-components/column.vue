@@ -8,11 +8,11 @@
 export default {
     name: 'container',
     props: {
-        width: Number
+        width: [Number, String]
     },
     data () {
         return {
-            widthString: this.width > 1? `${this.width}%` : `${this.width*100}%`
+            widthString: isNaN(this.width)? this.width: this.width > 1? `${this.width}%` : `${this.width*100}%`
         }
     }
 }

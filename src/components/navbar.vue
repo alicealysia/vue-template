@@ -1,19 +1,12 @@
 <template>
-    <scrollactive :class="{active: active}">
-      <img src="../assets/logo.png" />
+    <nav :class="{active: active}">
+      <img src="../assets/icons/logo.png" />
       <hamburger @hamburgerClicked="hamburgerClicked" />
-      <router-link @click.native="hamburgerClicked()" class="scrollactive-item" :to="{name: 'Home', hash: '#home'}">Home</router-link>
-      <router-link @click.native="hamburgerClicked()" class="scrollactive-item" :to="{name: 'Home', hash: '#services'}">Services</router-link>
-      <div class="relative">
-        <a style="display: inline-block" @click="toggleGallery"> Gallery &#9660; </a>
-        <div @click="toggleGallery" :class="gallery? 'gallery': 'hide'">
-          <router-link @click.native="hamburgerClicked()" to="/gallery/cars"> Car Signage </router-link>
-          <router-link @click.native="hamburgerClicked()" to="/gallery/signs"> Building Signage </router-link>
-          <router-link @click.native="hamburgerClicked()" to="/gallery/other"> Other </router-link>
-        </div>
-      </div>
-      <router-link @click.native="hamburgerClicked()" class="scrollactive-item" :to="{name: 'Home', hash: '#contact'}">Contact</router-link>
-    </scrollactive>
+      <router-link @click.native="hamburgerClicked()" to="/">Home</router-link>
+      <router-link @click.native="hamburgerClicked()" to="/About">About</router-link>
+      <router-link @click.native="hamburgerClicked()" to="/services">Services</router-link>
+      <router-link @click.native="hamburgerClicked()" to="/contact">Contact</router-link>
+    </nav>
 </template>
 <script>
 export default {
@@ -53,16 +46,11 @@ nav {
   text-align: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  border-style: solid;
-  border-color: white;
-  border-width: 1px;
-  border-radius: 0.25em;
-  background-color: rgb(70, 70, 73);
+  align-content: center;
 }
 .gallery a {
   width: 100%;
-  display: inline-block;
+  text-align: center;
 }
 
 @media (orientation: landscape) and (min-width: 1281px) {
@@ -85,12 +73,9 @@ nav {
   }
   .gallery {
     position:absolute;
-    top: 5em;
-    left: -10%;
-    right: -10%;
-    font-size: 0.8em;
-    margin: 0;
-    padding: 0;
+    top: 3em;
+    right: 7.5%;
+    background-color:rgb(49, 49, 52);
   }
 }
 @media (orientation: portrait), (max-width: 1280px) {
@@ -138,11 +123,11 @@ nav a {
 }
 
 nav a:hover {
-    color:rgb(245, 102, 55);
+    color:rgb(58, 55, 245);
 }
 
-.scrollactive-item.is-active {
-  color: rgb(240, 136, 101) !important;
+nav a.router-link-exact-active {
+  color: rgb(101, 110, 240);
 }
 
 .galleryButton {
@@ -157,6 +142,6 @@ nav a:hover {
 }
 
 .galleryButton:hover {
-    color:rgb(245, 102, 55);
+    color:rgb(58, 55, 245);
 }
 </style>

@@ -18,7 +18,7 @@
 <script>
 export default {
     props: {
-        items: Array || Object,
+        items: [Array, Object],
         mini: Array
     },
     data () {
@@ -88,6 +88,9 @@ export default {
         background-repeat: no-repeat;
         background-position:center;
         background-size: cover;
+    }
+    .slideshow > .fill[lazy="loading"] {
+        background-size: auto;
     }
     .fade-enter-active {
         animation: fadeIn 0.5s;

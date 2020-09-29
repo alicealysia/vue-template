@@ -1,5 +1,5 @@
 <template>
-    <div class='row' :style="`${justifyConverted} ${alignConverted}`">
+    <div class='row' :style="`${justifyConverted} ${alignConverted} ${directionConverted}`">
         <slot>
         </slot>
     </div>
@@ -16,23 +16,44 @@ const Justify = {
 }
 
 const Align = {
-  start: 'align-items: flex-start',
-  end: 'align-items: flex-end',
-  center: 'align-items: center',
-  baseline: 'align-items: baseline',
-  stretch: 'align-items: stretch'
+  start: 'align-items: flex-start;',
+  end: 'align-items: flex-end;',
+  center: 'align-items: center;',
+  baseline: 'align-items: baseline;',
+  stretch: 'align-items: stretch;'
+}
+
+const Direction = {
+    right: 'flex-direction: row',
+    left: 'flex-direction: row-reverse',
+    down: 'flex-direction: column',
+    up: 'flex-direction: column-reverse'
 }
 
 export default {
     name: 'container',
     props: {
-        justify: String,
-        align: String,
+        justify: {
+            type: String,
+            required: false,
+            default: 'around'
+        },
+        align: {
+            type: String,
+            required: false,
+            default: 'start'
+        },
+        direction: {
+            type: String,
+            required: false,
+            default: 'right'
+        }
     },
     data () {
         return {
             justifyConverted: Justify[this.justify],
-            alignConverted: Align[this.align]
+            alignConverted: Align[this.align],
+            directionConverted: Direction[this.direction]
         }
     }
 }
@@ -40,7 +61,6 @@ export default {
 <style>
     .row {
         display: flex;
-        flex-direction: row;
         flex-wrap: wrap;
     }
 </style>
